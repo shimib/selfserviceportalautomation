@@ -5,7 +5,7 @@ resources:
       path: shimib/selfserviceportalautomation
       gitProvider: shimiz
       buildOn:
-        commit: false
+        commit: true
   - name: execution_webhook
     type: IncomingWebhook
     configuration:
