@@ -24,6 +24,8 @@ pipelines:
         - name: dhall_templates_gitRepo
           trigger: false
         - name: execution_webhook
+       integrations:
+        - name: ArtifactoryUnified
       execution:
        onStart:
         - "wget https://github.com/dhall-lang/dhall-haskell/releases/download/1.31.1/dhall-1.31.1-x86_64-linux.tar.bz2"
@@ -36,5 +38,8 @@ pipelines:
         - echo $PACKAGES
         - sed -i -E "s/^(.+packages = ).+$/\1${PACKAGES}/"  ./Policy/Env.dhall
         - "cat ./Policy/Env.dhall"
+        - retry_command jfrog rt config --url $int_ArtifactoryUnified_url --user
+          $int_ArtifactoryUnified_user --apikey $int_ArtifactoryUnified_apikey
+          --interactive=false
         - "./scripts/create_repos.sh $TEAM"
         - "cat 2*/*"
