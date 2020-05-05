@@ -1,4 +1,4 @@
-let Role = ./TYpe.dhall
+let Role = ./Type.dhall
 
 let all
     : List Role
