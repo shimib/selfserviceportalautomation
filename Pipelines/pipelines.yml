@@ -26,7 +26,7 @@ pipelines:
         - name: execution_webhook
       execution:
        onStart:
-        - "cd src"
+        - "cd ${res_dhall_templates_gitRepo_resourcePath}/src"
         - "echo echo into then Env.dhall"
         - "cat ./Policy/Env.dhall"
         - "./scripts/create_repos.sh --dry-run"
