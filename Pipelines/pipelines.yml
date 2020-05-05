@@ -26,13 +26,13 @@ pipelines:
         - name: execution_webhook
       execution:
        onStart:
-        - "echo $res_execution_webhook_payload > x.x"
-        - cat x.x
         - "wget https://github.com/dhall-lang/dhall-haskell/releases/download/1.31.1/dhall-1.31.1-x86_64-linux.tar.bz2"
         - "tar -xvf dhall-1.31.1-x86_64-linux.tar.bz2"
         - "export PATH=${PATH}:${PWD}/bin"
         - "cd ${res_dhall_templates_gitRepo_resourcePath}/src"
         - export TEAM=`echo "${res_execution_webhook_payload}" | jq '.team'`
         - echo $TEAM
+        - export PACKAGES=`echo "${res_execution_webhook_payload}" | jq -c '.packages'` | tr '[:upper:]' '[:lower:]' | sed  -E "s/\"([a-z]+)\"/Maturity\.\1/g"
+        - echo $PACKAGES
         - "cat ./Policy/Env.dhall"
         - "./scripts/create_repos.sh --dry-run"
