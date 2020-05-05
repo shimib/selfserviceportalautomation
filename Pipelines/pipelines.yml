@@ -30,7 +30,7 @@ pipelines:
         - "tar -xvf dhall-1.31.1-x86_64-linux.tar.bz2"
         - "export PATH=${PATH}:${PWD}/bin"
         - "cd ${res_dhall_templates_gitRepo_resourcePath}/src"
-        - export TEAM=`echo ${res_execution_webhook_payload} | jq '.team'`
+        - export TEAM=`echo ${res_execution_webhook_payload} | jq -r '.team'`
         - echo $TEAM
         - export PACKAGES=`echo "${res_execution_webhook_payload}" | jq -c '.packages' | tr '[:upper:]' '[:lower:]' | sed  -E "s/\"([a-z]+)\"/PackageType\.\1/g"`
         - echo $PACKAGES
