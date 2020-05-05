@@ -25,8 +25,8 @@ pipelines:
          trigger: false
       execution:
        onStart:
-        - echo "cd to src dir"
-        - echo "dir is: ${PWD}"
-        - echo "echo into then Env.dhall"
-        - cat ./Policy/Env.dhall
-        - ./scripts/create_repos.sh --dry-run
+        - "echo cd to src dir"
+        - "echo dir is: ${PWD}"
+        - "echo echo into then Env.dhall"
+        - "cat ./Policy/Env.dhall"
+        - "./scripts/create_repos.sh --dry-run"
