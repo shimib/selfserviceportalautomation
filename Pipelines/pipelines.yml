@@ -36,5 +36,5 @@ pipelines:
         - echo $PACKAGES
         - sed -i -E "s/^(.+packages = ).+$/\1${PACKAGES}/"  ./Policy/Env.dhall
         - "cat ./Policy/Env.dhall"
-        - "./scripts/create_repos.sh $TEAM --dry-run"
+        - "./scripts/create_repos.sh $TEAM"
         - "cat 2*/*"
