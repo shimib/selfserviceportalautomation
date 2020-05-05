@@ -1,0 +1,30 @@
+resources:
+  - name: dhall_templates_gitRepo
+    type: GitRepo
+    configuration:
+      path: shimib/selfserviceportalautomation
+      gitProvider: shimiz
+      buildOn:
+        commit: false
+  - name: execution_webhook
+    type: IncomingWebhook
+    configuration:
+            triggerSelfServiceAutomation
+pipelines:
+  - name: onboard_project
+    type: Bash
+    configuration:
+       environmentVariables:
+            TEAM: '${team}'
+            MATURITIES: '${maturities}'
+            PACKAGES: '${packages}'
+    inputResources:
+       - name: dhall_templates_gitRepo
+         trigger: false
+    execution:
+      onStart:
+        - echo "cd to src dir"
+        - echo "dir is: ${PWD}"
+        - echo "echo into then Env.dhall"
+        - cat ./Policy/Env.dhall
+        - ./scripts/create_repos.sh --dry-run
