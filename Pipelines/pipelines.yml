@@ -20,9 +20,9 @@ pipelines:
             TEAM: '${team}'
             MATURITIES: '${maturities}'
             PACKAGES: '${packages}'
-      inputResources:
-       - name: dhall_templates_gitRepo
-         trigger: false
+       inputResources:
+        - name: dhall_templates_gitRepo
+          trigger: false
       execution:
        onStart:
         - "echo cd to src dir"
