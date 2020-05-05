@@ -23,6 +23,7 @@ pipelines:
        inputResources:
         - name: dhall_templates_gitRepo
           trigger: false
+        - name: execution_webhook
       execution:
        onStart:
         - "echo cd to src dir"
