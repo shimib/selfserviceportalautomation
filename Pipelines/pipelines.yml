@@ -9,19 +9,21 @@ resources:
   - name: execution_webhook
     type: IncomingWebhook
     configuration:
-            triggerSelfServiceAutomation
+            webhookName: triggerSelfServiceAutomation
 pipelines:
   - name: onboard_project
-    type: Bash
-    configuration:
+  - steps:
+   - name: generateTemplatesAndExecute
+     type: Bash
+     configuration:
        environmentVariables:
             TEAM: '${team}'
             MATURITIES: '${maturities}'
             PACKAGES: '${packages}'
-    inputResources:
+     inputResources:
        - name: dhall_templates_gitRepo
          trigger: false
-    execution:
+     execution:
       onStart:
         - echo "cd to src dir"
         - echo "dir is: ${PWD}"
