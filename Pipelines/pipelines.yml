@@ -34,6 +34,6 @@ pipelines:
         - echo $TEAM
         - export PACKAGES=`echo "${res_execution_webhook_payload}" | jq -c '.packages' | tr '[:upper:]' '[:lower:]' | sed  -E "s/\"([a-z]+)\"/PackageType\.\1/g"`
         - echo $PACKAGES
-        - sed -i -E "s/^(.+packages = ).+$/\1${PACKAGES}/"  ./Policy/Env/dhall
+        - sed -i -E "s/^(.+packages = ).+$/\1${PACKAGES}/"  ./Policy/Env.dhall
         - "cat ./Policy/Env.dhall"
         - "./scripts/create_repos.sh --dry-run"
