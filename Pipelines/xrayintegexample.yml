@@ -1,0 +1,26 @@
+resources:
+  - name: dhall_templates_gitRepo
+    type: GitRepo
+    configuration:
+      path: shimib/selfserviceportalautomation
+      gitProvider: shimiz
+      buildOn:
+        commit: true
+  - name: xray_webhook
+    type: IncomingWebhook
+    configuration:
+            webhookName: xray_webhook
+pipelines:
+  - name: xray_integration_example
+    steps:
+    - name: echo_payload
+      type: Bash
+      configuration:
+       inputResources:
+        - name: xray_webhook
+       integrations:
+        - name: ArtifactoryUnified
+      execution:
+       onStart:
+        - export PAYLOAD=`echo ${res_execution_webhook_payload} | jq  '.'`
+        - echo $PAYLOAD
