@@ -1,11 +1,4 @@
 resources:
-  - name: dhall_templates_gitRepo
-    type: GitRepo
-    configuration:
-      path: shimib/selfserviceportalautomation
-      gitProvider: shimiz
-      buildOn:
-        commit: true
   - name: xray_webhook
     type: IncomingWebhook
     configuration:
